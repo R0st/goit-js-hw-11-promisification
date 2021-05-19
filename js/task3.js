@@ -1,4 +1,4 @@
-// === Task3 ===
+// // === Task3 ===
 console.log('=== Task3 ===');
 
 const randomIntegerFromInterval = (min, max) => {
@@ -6,24 +6,25 @@ const randomIntegerFromInterval = (min, max) => {
 };
 
 // const makeTransaction = (transaction, onSuccess, onError) => {
-const makeTransaction = (transaction) => {
+const makeTransaction = ({ id, amount }) => {
   const delay = randomIntegerFromInterval(200, 500);
     return new Promise((resolve, reject) => {
+        
         setTimeout(() => {
-    const canProcess = Math.random() > 0.3;
-        if (canProcess) {
-    //   onSuccess(transaction.id, delay);
-            resolve(transaction.id, delay);
+          const canProcess = Math.random() > 0.3;
+            if (canProcess) {
+                //   onSuccess(transaction.id, delay);
+              resolve({ id, amount });
     } else {
     //   onError(transaction.id);
-            reject(transaction.id)
+            reject(id)
     }
   }, delay);
 });
 }
   
-const logSuccess = (id, time) => {
-  console.log(`Transaction ${id} processed in ${time}ms`);
+const logSuccess = ({ id, amount }) => {
+  console.log(`Transaction ${id} processed in ${amount}ms`);
 };
 
 const logError = id => {
